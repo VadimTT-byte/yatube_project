@@ -1,0 +1,54 @@
+<!DOCTYPE html> <!-- Используется html 5 версии -->
+
+<html lang="ru"> <!-- Язык сайта - русский -->
+{% extends 'base.html' %}
+
+  <head>
+    
+    <meta charset="utf-8"> <!-- Кодировка сайта -->
+    <!-- Сайт готов работать с мобильными устройствами -->
+    
+    <!-- Загружаем фав-иконки -->
+    {% load static %}
+    <!-- Подключен файл со стандартными стилями бустрап -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>
+      {% block title %} 
+      {{ title }} 
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+        <!-- Должно подхватиться с includes/header.html -->
+    </header>
+    <main> 
+      <!-- класс py-5 создает отступы сверху и снизу блока -->
+      {% block content %}
+      <div class="container py-5">     
+        <h1> {{ text }} </h1>
+        {% for post in posts %}
+  <ul>
+    <li>
+      Автор: {{ post.author.get_full_name }}
+    </li>
+    <li>
+      Дата публикации: {{ post.pub_date|date:"d E Y" }}
+    </li>
+  </ul>
+  <p>{{ post.text }}</p>    
+  <a href="">все записи группы</a>
+  {% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
+        <!-- под последним постом нет линии -->
+      </div>
+      {% endblock %} 
+    </main>
+    <!-- Использованы классы бустрапа: -->
+    <!-- border-top: создаёт тонкую линию сверху блока -->
+    <!-- text-center: выравнивает текстовые блоки внутри блока по центру -->
+    <!-- py-3: контент внутри размещается с отступом сверху и снизу -->         
+    <footer class="border-top text-center py-3">
+      <!-- Должно подхватиться с includes/footer.html-->
+    </footer>
+  </body>
