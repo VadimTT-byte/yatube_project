@@ -12,6 +12,7 @@ class PostAdmin(admin.ModelAdmin):
         'author',
         'group',
         )
+    list_editable = ('group',)
     # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('text',)
     # Добавляем возможность фильтрации по дате
@@ -19,7 +20,6 @@ class PostAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
     # При регистрации модели Post источником конфигурации для неё назначаем 
     # класс PostAdmin
-    list_editable = ('group',)
 
 
 admin.site.register(Post, PostAdmin)
